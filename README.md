@@ -2,7 +2,7 @@ auc-itemlist
 =============
 
 本ツールは英雄クロニクル（サクセスサーバ）における倉庫整理のためのChrome Extensionです
-本ツールはAUCキャラ情報検索システム(http://nuko.cher-ish.net/auc/sys/index.html)にて公開されている
+本ツールはAUCキャラ情報検索システム( http://nuko.cher-ish.net/auc/sys/index.html )にて公開されている
 google Chrome 拡張機能 for サクセスサーバーの改変版となります。
 
 本ツールを利用したいかなる問題についても責任は持ちません。
