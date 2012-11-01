@@ -1,0 +1,97 @@
+
+
+#tempItemWrap {
+	font-size : 11px;
+	width : 200px;
+	height : 100%;
+	position:absolute;
+	right : 0px;
+	top : 0px;
+	padding : 10px 10px 40px 10px;
+/*	overflow:scroll;*/
+	color : #fff;
+	text-align : left;
+	border : #DFD8C8;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+#tempItemWrap textarea{
+	width : 200px;
+	height : 200px;
+}
+
+#tempTabWrap {
+	font-size : 11px;
+	width : 200px;
+	height : 100%;
+	position:absolute;
+	left : 0px;
+	top : 0px;
+	padding : 10px;
+/*	overflow:scroll; */
+	color : #fff;
+	text-align : left;
+	border : #DFD8C8;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+#stockTable {
+	width: 90%;
+	margin: 0 auto;
+	background: url('/web/img/exbg.png') 0 0 ;
+}
+
+#stockTable tr th {
+	padding : 3px 5px;
+	text-align : center;
+	font-weight : bold;
+	border-bottom :1px solid #333;
+}
+
+#stockTable tr td {
+	padding : 3px 5px;
+}
+
+#stockTable tr td.t1 { width : 20%; border-right:1px solid  #333; }
+#stockTable tr td.t2 { width :  5%; border-right:1px dotted #666; text-align : right; }
+#stockTable tr td.t3 { width : 25%; border-right:1px dotted #666; }
+#stockTable tr td.t4 { width : 25%; border-right:1px dotted #666; }
+#stockTable tr td.t5 { width : 25%;  }
+
+#stockTable tr td.g1 { width : 16%; border-right:1px dotted #666; text-align : center; }
+#stockTable tr td.g2 { width : 20%; border-right:1px dotted #666; }
+#stockTable tr td.g3 { width : 20%; border-right:1px dotted #666; }
+#stockTable tr td.g4 { width : 20%; border-right:1px dotted #666; }
+#stockTable tr td.g5 { width : 20%;  }
+
+#stockTable tr td.g1 a {
+	color: #543219;
+	background : #DFD8C8;
+	border : 1px solid #999;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	border-radius: 9px;
+	padding : 0px 6px;
+}
+
+
+
+
+
+#stockTable tr td.n1 { border-right:1px dotted #666; font-size :90%; border-bottom:1px solid #333; }
+#stockTable tr td.n2 { border-right:1px dotted #666; font-size :90%; border-bottom:1px solid #333; }
+#stockTable tr td.n3 { border-right:1px dotted #666; font-size :90%; border-bottom:1px solid #333; }
+#stockTable tr td.n4 { border-right:1px dotted #666; font-size :90%; border-bottom:1px solid #333; }
+#stockTable tr td.n5 { border-right:1px dotted #666; font-size :90%; border-bottom:1px solid #333; text-align : right; }
+#stockTable tr td.n6 { font-size :90%; text-align : right; border-bottom:1px solid #333; }
+
+
+#stockTable tr td.ts1 { width : 21%; border-right  :1px dotted #333; border-bottom :1px solid #666; }
+#stockTable tr td.ts2 { width : 79%; border-bottom :1px solid #333; }
+#stockTable tr td.ts3 { text-align : center; width : 26%; border-right  :1px dotted #333; border-bottom :1px solid #666; }
+#stockTable tr td.ts4 { text-align : center; width : 26%; border-right  :1px dotted #333; border-bottom :1px solid #666; }
+#stockTable tr td.ts5 { text-align : center; width : 26%; border-bottom :1px solid #666; }
+
