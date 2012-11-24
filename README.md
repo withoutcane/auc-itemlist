@@ -13,10 +13,14 @@ google Chrome 拡張機能 for サクセスサーバーの改変版となりま�
 V.1.8.3 HP特攻における物理、魔法判断がなされていないバグに対応。スキルの構造体のリファクタリング。
 V.1.8.2 第5期追加スキルに対応。リスト動作の起動をリンククリックに変更。
 
+インストール方法
+---------
+１．Download（ https://github.com/withoutcane/auc-itemlist/downloads ） よりaucitemlist.crxをダウンロードする。
+２．ChromeのHelpにあるMarket以外からのChrome拡張のインストールに従い、インストールする。
+（ http://support.google.com/chrome_webstore/bin/answer.py?hl=ja&answer=2664769 ）
+
+
 利用方法
 ---------
-Downloadsよりaucitemlist.crxをダウンロードし、Google Chromeにインストールしてください。
-Market以外からのChrome拡張のインストールはChromeのHelpを参照ください。
-（ http://support.google.com/chrome_webstore/bin/answer.py?hl=ja&answer=2664769 ）
 インストール後は「ショップ バザール購入 …」といったリンクが並んでいるところに「アイテムリスト追加」というリンクが追加されています。
 追加されたリンクをクリックすると、これまでのアイテムリストが表示されます。
