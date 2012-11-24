@@ -1,10 +1,88 @@
 $(function(){
-	var form = '<li><a id="itemliston">アイテムリスト追加</a></li>';
-	$('li.page-menu-visit').append(form);
+	var itemlistbutton = '<li><a id="itemliston">アイテムリスト追加</a></li>';
+	$('li.page-menu-visit').append(itemlistbutton);
 	$('#itemliston').click(function() {
 		 main();
 	});
 });
+
+var skill = [
+	{name:"レア",type:"R"},
+	{name:"剣術",type:"近接"},
+	{name:"槍術",type:"近接"},
+	{name:"斧術",type:"近接"},
+	{name:"槌術",type:"近接"},
+	{name:"格闘術",type:"近接"},
+	{name:"弓術",type:"射撃"},
+	{name:"射出術",type:"射撃"},
+	{name:"砲撃術",type:"射撃"},
+	{name:"投擲術",type:"射撃"},
+	{name:"接射術",type:"射撃"},
+	{name:"黒魔法",type:"魔術"},
+	{name:"白魔法",type:"魔術"},
+	{name:"対象識別",type:"魔術"},
+	{name:"隠行",type:"隠密"},
+	{name:"踏破",type:"隠密"},
+	{name:"疾走",type:"隠密"},
+	{name:"包囲",type:"隠密"},
+	{name:"離脱",type:"隠密"},
+	{name:"必中",type:"攻撃"},
+	{name:"急所狙い",type:"攻撃"},
+	{name:"物理奥義",type:"攻撃"},
+	{name:"魔法奥義",type:"攻撃"},
+	{name:"連撃",type:"攻撃"},
+	{name:"二刀",type:"攻撃"},
+	{name:"威力増加",type:"攻撃"},
+	{name:"武器破壊",type:"攻撃"},
+	{name:"防具破壊",type:"攻撃"},
+	{name:"残心",type:"攻撃"},
+	{name:"命中増加",type:"攻撃"},
+	{name:"回避増加",type:"防御"},
+	{name:"盾術",type:"防御"},
+	{name:"察知",type:"防御"},
+	{name:"鉄壁",type:"防御"},
+	{name:"見切り",type:"防御"},
+	{name:"反撃",type:"防御"},
+	{name:"先制",type:"防御"},
+	{name:"物理回避",type:"防御"},
+	{name:"魔法回避",type:"防御"},
+	{name:"物理防御増加",type:"防御"},
+	{name:"魔法防御増加",type:"防御"},
+	{name:"直接体術",type:"防御"},
+	{name:"間接体術",type:"防御"},
+	{name:"範囲体術",type:"防御"},
+	{name:"撥ね除け",type:"防御"},
+	{name:"指揮",type:"其他"},
+	{name:"威圧",type:"其他"},
+	{name:"足止め",type:"其他"},
+	{name:"道具活用",type:"其他"},
+	{name:"護衛",type:"其他"},
+	{name:"携行",type:"其他"},
+	{name:"武装熟練",type:"其他"},
+	{name:"攻防一体",type:"其他"},
+	{name:"耐久保護",type:"其他"},
+	{name:"鼓舞",type:"其他"},
+	{name:"指示",type:"コマ"},
+	{name:"予測",type:"コマ"},
+	{name:"蘇生",type:"コマ"},
+	{name:"強打",type:"コマ"},
+	{name:"薙ぎ払い",type:"コマ"},
+	{name:"長距離射撃",type:"コマ"},
+	{name:"貫通攻撃",type:"コマ"},
+	{name:"精密攻撃",type:"コマ"},
+	{name:"MP同時攻撃",type:"コマ"},
+	{name:"捕捉攻撃",type:"コマ"},
+	{name:"威力強化",type:"C"},
+	{name:"命中強化",type:"C"},
+	{name:"耐久強化",type:"C"},
+	{name:"威力修正強化",type:"C"},
+	{name:"命中修正強化",type:"C"},
+	{name:"盾回避強化",type:"C"},
+	{name:"対物理強化",type:"C"},
+	{name:"対魔法強化",type:"C"},
+	{name:"粗悪品",type:"C"},
+	{name:"―",type:"要素なし"}
+];
 
 function getTypeText( tempText ){
 	var tempGetText = '';
@@ -15,163 +93,19 @@ function getTypeText( tempText ){
 	return tempGetText;
 }
 
+function getSkillId (target) {
+	for (var i = 0; i < skill.length; i++) {
+		 if (skill[i].name == target) return i;
+	}
+	return 0;
+}
+
 function main (){
 	var tempHtml = '';
 	var tempTsv  = '';
 	var tempRightHtml = '';
 	var tempRightHtmlEnd = '<hr />';
 
-	var skType =  new Array(
-		 "R"
-		,"近接"
-		,"近接"
-		,"近接"
-		,"近接"
-		,"近接"
-		,"射撃"
-		,"射撃"
-		,"射撃"
-		,"射撃"
-		,"射撃"
-		,"魔術"
-		,"魔術"
-		,"魔術"
-		,"隠密"
-		,"隠密"
-		,"隠密"
-		,"隠密"
-		,"隠密"
-		,"攻撃"
-		,"攻撃"
-		,"攻撃"
-		,"攻撃"
-		,"攻撃"
-		,"攻撃"
-		,"攻撃"
-		,"攻撃"
-		,"攻撃"
-		,"攻撃"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"防御"
-		,"其他"
-		,"其他"
-		,"其他"
-		,"其他"
-		,"其他"
-		,"其他"
-		,"其他"
-		,"其他"
-		,"其他"
-		,"其他"
-		,"コマ"
-		,"コマ"
-		,"コマ"
-		,"コマ"
-		,"コマ"
-		,"コマ"
-		,"コマ"
-		,"コマ"
-		,"コマ"
-		,"コマ"
-		,"C"
-		,"C"
-		,"C"
-		,"C"
-		,"C"
-		,"C"
-		,"C"
-		,"C"
-		,"要素なし"
-	);
-	var skID = {
-	 "剣術":1
-	,"槍術":2
-	,"斧術":3
-	,"槌術":4
-	,"格闘術":5
-	,"弓術":6
-	,"射出術":7
-	,"砲撃術":8
-	,"投擲術":9
-	,"接射術":10
-	,"黒魔法":11
-	,"白魔法":12
-	,"対象識別":13
-	,"隠行":14
-	,"踏破":15
-	,"疾走":16
-	,"包囲":17
-	,"離脱":18
-	,"必中":19
-	,"急所狙い":20
-	,"物理奥義":21
-	,"魔法奥義":21
-	,"連撃":22
-	,"二刀":23
-	,"威力増加":24
-	,"武器破壊":25
-	,"防具破壊":26
-	,"残心":27
-	,"命中増加":28
-	,"回避増加":29
-	,"盾術":30
-	,"察知":31
-	,"鉄壁":32
-	,"見切り":33
-	,"反撃":34
-	,"先制":35
-	,"物理回避":36
-	,"魔法回避":37
-	,"物理防御増加":38
-	,"魔法防御増加":39
-	,"直接体術":40
-	,"間接体術":41
-	,"範囲体術":42
-	,"撥ね除け":43
-	,"指揮":44
-	,"威圧":45
-	,"足止め":46
-	,"道具活用":47
-	,"護衛":48
-	,"携行":49
-	,"武装熟練":50
-	,"攻防一体":51
-	,"耐久保護":52
-	,"鼓舞":53
-	,"指示":54
-	,"予測":55
-	,"蘇生":56
-	,"強打":57
-	,"薙ぎ払い":58
-	,"長距離射撃":59
-	,"貫通攻撃":60
-	,"精密攻撃":61
-	,"MP同時攻撃":62
-	,"捕捉攻撃":63
-	,"威力強化":64
-	,"命中強化":65
-	,"耐久強化":66
-	,"威力修正強化":67
-	,"命中修正強化":68
-	,"盾回避強化":69
-	,"対物理強化":70
-	,"対魔法強化":71
-	,"粗悪品":72
-	,"―":99
-	};
 
 	$('#tempItemWrap').remove();
 	var tempPage = $('span.pager-num').eq(0).text();
@@ -306,10 +240,10 @@ function main (){
 
 				var xx   = tempIMainSP[1].split(" Lv.");
 
-				var tempSkId = 0;
-				if( skID[xx[0]] ){
-					tempSkId = skID[xx[0]];
-				}
+				var tempSkId = getSkillId(xx[0]);
+				//if( skID[xx[0]] ){
+				//	tempSkId = skID[xx[0]];
+				//}
 
 				var tempISub1SP = tempISub1.split("：");
 				var tempISub2SP = tempISub2.split("：");
@@ -347,7 +281,11 @@ function main (){
 				var tempTypeSub1 = tempElement.eq(1).find('img').attr('src');
 				var tempTypeSub2 = tempElement.eq(2).find('img').attr('src');
 
-				if( tempIMain.match(/MP特攻/) ){
+				if( tempIMain.match(/HP特攻/) ){
+					var tempTitle = tempElement.eq(0).attr('title');
+					if( tempTitle.match(/攻撃魔法/) ){ tempIMain += '魔'; }
+					else if( tempTitle.match(/物理攻撃/) ){ tempIMain += '物'; }
+				} else if( tempIMain.match(/MP特攻/) ){
 					var tempTitle = tempElement.eq(0).attr('title');
 					if( tempTitle.match(/攻撃魔法/) ){ tempIMain += '魔'; }
 					else if( tempTitle.match(/物理攻撃/) ){ tempIMain += '物'; }
@@ -368,10 +306,10 @@ function main (){
 
 				var xx   = tempIMainSP[1].split(" Lv.");
 
-				var tempSkId = 0;
-				if( skID[xx[0]] ){
-					tempSkId = skID[xx[0]];
-				}
+				var tempSkId = getSkillId(xx[0]);
+				//if( skID[xx[0]] ){
+				//	tempSkId = skID[xx[0]];
+				//}
 
 				var tempISub1SP = tempISub1.split("：");
 				var tempISub2SP = tempISub2.split("：");
@@ -404,7 +342,11 @@ function main (){
 				var tempTypeSub1 = tempElement.eq(1).find('img').attr('src');
 				var tempTypeSub2 = tempElement.eq(2).find('img').attr('src');
 
-				if( tempIMain.match(/MP特攻/) ){
+				if( tempIMain.match(/HP特攻/) ){
+					var tempTitle = tempElement.eq(0).attr('title');
+					if( tempTitle.match(/攻撃魔法/) ){ tempIMain += '魔'; }
+					else if( tempTitle.match(/物理攻撃/) ){ tempIMain += '物'; }
+				} else if( tempIMain.match(/MP特攻/) ){
 					var tempTitle = tempElement.eq(0).attr('title');
 					if( tempTitle.match(/攻撃魔法/) ){ tempIMain += '魔'; }
 					else if( tempTitle.match(/物理攻撃/) ){ tempIMain += '物'; }
@@ -425,10 +367,10 @@ function main (){
 
 				var xx   = tempIMainSP[1].split(" Lv.");
 
-				var tempSkId = 0;
-				if( skID[xx[0]] ){
-					tempSkId = skID[xx[0]];
-				}
+				var tempSkId = getSkillId(xx[0]);
+				//if( skID[xx[0]] ){
+				//	tempSkId = skID[xx[0]];
+				//}
 
 				var tempISub1SP = tempISub1.split("：");
 				var tempISub2SP = tempISub2.split("：");
@@ -540,8 +482,8 @@ function main (){
 				} else if( !v[1].match(/―/) && !v[2].match(/粗悪品/) && !v[2].match(/―/) && v[3].match(/―/) ){
 					tempRightHtmlEnd += "[合成品]<br />　" + v[1] + "<br />　" + v[2] + "<br />";
 				} else if( v[1].match(/―/) ){
-				} else if( skType[v[9]] != '' ){
-					tempRightHtml += "[" + skType[v[9]] + "]" + v[1] + "<br />";
+				} else if( skill[v[9]].type != '' ){
+					tempRightHtml += "[" + skill[v[9]].type + "]" + v[1] + "<br />";
 				} else {
 					tempRightHtmlEnd += v[1] + "<br />";
 				}
