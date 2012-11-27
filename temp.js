@@ -28,6 +28,7 @@ var skill = [
 	{name:"離脱",type:"隠密"},
 	{name:"必中",type:"攻撃"},
 	{name:"急所狙い",type:"攻撃"},
+	{name:"奥義",type:"攻撃"},
 	{name:"物理奥義",type:"攻撃"},
 	{name:"魔法奥義",type:"攻撃"},
 	{name:"連撃",type:"攻撃"},
@@ -38,6 +39,7 @@ var skill = [
 	{name:"残心",type:"攻撃"},
 	{name:"命中増加",type:"攻撃"},
 	{name:"回避増加",type:"防御"},
+	{name:"連携攻撃",type:"防御"},
 	{name:"盾術",type:"防御"},
 	{name:"察知",type:"防御"},
 	{name:"鉄壁",type:"防御"},
@@ -72,6 +74,7 @@ var skill = [
 	{name:"精密攻撃",type:"コマ"},
 	{name:"MP同時攻撃",type:"コマ"},
 	{name:"捕捉攻撃",type:"コマ"},
+	{name:"自爆",type:"コマ"},
 	{name:"威力強化",type:"C"},
 	{name:"命中強化",type:"C"},
 	{name:"耐久強化",type:"C"},
@@ -83,6 +86,59 @@ var skill = [
 	{name:"粗悪品",type:"C"},
 	{name:"―",type:"要素なし"}
 ];
+
+var subelement = [
+	{name:"反射",
+	 subname:{
+		"魔法":"(魔)",
+		"物理":"(物)"
+		}
+	},
+	{name:"威力減少",
+	 subname:{
+		"魔法":"(魔)",
+		"物理":"(物)"
+		}
+	},
+	{name:"追加ダメージ",
+	 subname:{
+		"魔法":"(魔)",
+		"物理":"(物)"
+		}
+	},
+	{name:"HP特攻",
+	 subname:{
+		"魔法":"(魔)",
+		"物理":"(物)"
+		}
+	},
+	{name:"MP特攻",
+	 subname:{
+		"魔法":"(魔)",
+		"物理":"(物)"
+		}
+	},
+	{name:"報復",
+	 subname:{
+		"魔法":"(魔)",
+		"物理":"(物)"
+		}
+	},
+	{name:"損害制限",
+	 subname:{
+		"MP30":"(小)",
+		"MP60":"(中)",
+		"MP100":"(大)"
+		}
+	},
+	{name:"奥義",
+	 subname:{
+		"魔法":"(魔)",
+		"物理":"(物)"
+		}
+	}
+];
+	
 
 function getTypeText( tempText ){
 	var tempGetText = '';
@@ -98,6 +154,19 @@ function getSkillId (target) {
 		 if (skill[i].name == target) return i;
 	}
 	return 0;
+}
+
+function addSubElement (target,targettitle) {
+	for (var i = 0; i < subelement.length; i++) {
+		var regName = new RegExp(subelement[i].name);
+		 if (target.match(regName)) {
+			for (var j in subelement[i].subname) {
+				var regSubName = new RegExp(j);
+				if (targettitle.match(regSubName)) return target + subelement[i].subname[j];
+			}
+		 }
+	}
+	return target;
 }
 
 function main (){
@@ -183,6 +252,7 @@ function main (){
 				var tempNameIco  = tempTd.find('img').attr('src');
 				var tempName     = tempTd.text();
 				var tempElement  = $(this).find('td.item-name-status2').children('div');
+				var tempElementTitle = tempElement.eq(0)[0].title;
 				var tempIMain    = tempElement.eq(0).text().split("：");
 				var tempISub     = tempElement.eq(1).text();
 				var tempISubSP   = tempISub.split("：");
@@ -212,6 +282,7 @@ function main (){
 				var tempData3 = tempTd2.find('.item-bottom-table-g').html().replace(/現在価格：/, "");
 
 				var tempElement  = $(this).find('td.item-name-td-element').children('div');
+				var tempElementTitle = tempElement.eq(0)[0].title;
 				var tempIMain    = tempElement.eq(0).text();
 				var tempISub1    = tempElement.eq(1).text().replace(/品 Lv./, "");
 				var tempISub2    = tempElement.eq(2).text().replace(/品 Lv./, "");
@@ -219,15 +290,9 @@ function main (){
 				var tempTypeSub1 = tempElement.eq(1).find('img').attr('src');
 				var tempTypeSub2 = tempElement.eq(2).find('img').attr('src');
 
-				if( tempIMain.match(/MP特攻/) ){
-					var tempTitle = tempElement.eq(0).attr('title');
-					if( tempTitle.match(/攻撃魔法/) ){ tempIMain += '魔'; }
-					else if( tempTitle.match(/物理攻撃/) ){ tempIMain += '物'; }
-				} else if( tempIMain.match(/奥義/) ){
-					var tempTitle = tempElement.eq(0).attr('title');
-					if( tempTitle.match(/攻撃魔法/) ){ tempIMain = tempIMain.replace(/奥義/, "魔法奥義"); }
-					else if( tempTitle.match(/物理攻撃/) ){ tempIMain = tempIMain.replace(/奥義/, "物理奥義"); }
-				}
+				tempIMain = addSubElement(tempIMain,tempElement.eq(0)[0].title);
+				tempISub1 = addSubElement(tempISub1,tempElement.eq(1)[0].title);
+				tempISub2 = addSubElement(tempISub2,tempElement.eq(2)[0].title);
 
 				var tempIMainSP = "";
 
@@ -274,6 +339,7 @@ function main (){
 				var tempBtn2 = tempTd.find('.btn-item-name2').children('a').attr('href');
 
 				var tempElement  = $(this).find('td.item-name-td-element').children('div');
+				var tempElementTitle = tempElement.eq(0)[0].title;
 				var tempIMain    = tempElement.eq(0).text();
 				var tempISub1    = tempElement.eq(1).text();
 				var tempISub2    = tempElement.eq(2).text();
@@ -281,19 +347,9 @@ function main (){
 				var tempTypeSub1 = tempElement.eq(1).find('img').attr('src');
 				var tempTypeSub2 = tempElement.eq(2).find('img').attr('src');
 
-				if( tempIMain.match(/HP特攻/) ){
-					var tempTitle = tempElement.eq(0).attr('title');
-					if( tempTitle.match(/攻撃魔法/) ){ tempIMain += '魔'; }
-					else if( tempTitle.match(/物理攻撃/) ){ tempIMain += '物'; }
-				} else if( tempIMain.match(/MP特攻/) ){
-					var tempTitle = tempElement.eq(0).attr('title');
-					if( tempTitle.match(/攻撃魔法/) ){ tempIMain += '魔'; }
-					else if( tempTitle.match(/物理攻撃/) ){ tempIMain += '物'; }
-				} else if( tempIMain.match(/奥義/) ){
-					var tempTitle = tempElement.eq(0).attr('title');
-					if( tempTitle.match(/攻撃魔法/) ){ tempIMain = tempIMain.replace(/奥義/, "魔法奥義"); }
-					else if( tempTitle.match(/物理攻撃/) ){ tempIMain = tempIMain.replace(/奥義/, "物理奥義"); }
-				}
+				tempIMain = addSubElement(tempIMain,tempElement.eq(0)[0].title);
+				tempISub1 = addSubElement(tempISub1,tempElement.eq(1)[0].title);
+				tempISub2 = addSubElement(tempISub2,tempElement.eq(2)[0].title);
 
 				var tempIMainSP = "";
 
@@ -342,19 +398,9 @@ function main (){
 				var tempTypeSub1 = tempElement.eq(1).find('img').attr('src');
 				var tempTypeSub2 = tempElement.eq(2).find('img').attr('src');
 
-				if( tempIMain.match(/HP特攻/) ){
-					var tempTitle = tempElement.eq(0).attr('title');
-					if( tempTitle.match(/攻撃魔法/) ){ tempIMain += '魔'; }
-					else if( tempTitle.match(/物理攻撃/) ){ tempIMain += '物'; }
-				} else if( tempIMain.match(/MP特攻/) ){
-					var tempTitle = tempElement.eq(0).attr('title');
-					if( tempTitle.match(/攻撃魔法/) ){ tempIMain += '魔'; }
-					else if( tempTitle.match(/物理攻撃/) ){ tempIMain += '物'; }
-				} else if( tempIMain.match(/奥義/) ){
-					var tempTitle = tempElement.eq(0).attr('title');
-					if( tempTitle.match(/攻撃魔法/) ){ tempIMain = tempIMain.replace(/奥義/, "魔法奥義"); }
-					else if( tempTitle.match(/物理攻撃/) ){ tempIMain = tempIMain.replace(/奥義/, "物理奥義"); }
-				}
+				tempIMain = addSubElement(tempIMain,tempElement.eq(0)[0].title);
+				tempISub1 = addSubElement(tempISub1,tempElement.eq(1)[0].title);
+				tempISub2 = addSubElement(tempISub2,tempElement.eq(2)[0].title);
 
 				var tempIMainSP = "";
 
