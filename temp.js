@@ -252,13 +252,20 @@ function main (){
 				var tempNameIco  = tempTd.find('img').attr('src');
 				var tempName     = tempTd.text();
 				var tempElement  = $(this).find('td.item-name-status2').children('div');
-				var tempElementTitle = tempElement.eq(0)[0].title;
 				var tempIMain    = tempElement.eq(0).text().split("：");
 				var tempISub     = tempElement.eq(1).text();
 				var tempISubSP   = tempISub.split("：");
+				var tempIEffect = tempElement.eq(3).find('a').text();
 
 				var tempISubSP1  = tempISubSP[1].split("個数");
 				var tempISubSP2  = tempISubSP[2].split("装備キャラ");
+
+				tempIMain = addSubElement(tempIMain,tempElement.eq(0)[0].title);
+				tempISub1 = addSubElement(tempISub1,tempElement.eq(1)[0].title);
+				tempISub2 = addSubElement(tempISub2,tempElement.eq(2)[0].title);
+				
+				if (tempIEffect != "") tempName= tempName + "【" + tempIEffect + "】";
+
 
 				setData[setCnt] = new Array(
 					 tempName
@@ -268,6 +275,7 @@ function main (){
 					,tempISubSP[3]
 					,tempNameUrl
 					,tempNameIco
+					,tempIEffect
 				);
 
 			} else if( tempUrl.match(/auction_list/) || tempUrl.match(/bazar_list/) ){
@@ -286,6 +294,7 @@ function main (){
 				var tempIMain    = tempElement.eq(0).text();
 				var tempISub1    = tempElement.eq(1).text().replace(/品 Lv./, "");
 				var tempISub2    = tempElement.eq(2).text().replace(/品 Lv./, "");
+				var tempIEffect = tempElement.eq(3).find('a').text();
 				var tempTypeMain = tempElement.eq(0).find('img').attr('src');
 				var tempTypeSub1 = tempElement.eq(1).find('img').attr('src');
 				var tempTypeSub2 = tempElement.eq(2).find('img').attr('src');
@@ -294,7 +303,10 @@ function main (){
 				tempISub1 = addSubElement(tempISub1,tempElement.eq(1)[0].title);
 				tempISub2 = addSubElement(tempISub2,tempElement.eq(2)[0].title);
 
+				if (tempIEffect != "") tempName= tempName + "【" + tempIEffect + "】";
+
 				var tempIMainSP = "";
+
 
 
 				if( tempIMain.match(/： /) ){
@@ -327,6 +339,7 @@ function main (){
 					,tempData1
 					,tempData2
 					,tempData3
+					,tempIEffect
 				);
 
 			} else if( tempUrl.match(/item_stock_put/) || tempUrl.match(/sell_list/) ){
@@ -343,6 +356,7 @@ function main (){
 				var tempIMain    = tempElement.eq(0).text();
 				var tempISub1    = tempElement.eq(1).text();
 				var tempISub2    = tempElement.eq(2).text();
+				var tempIEffect = tempElement.eq(3).find('a').text();
 				var tempTypeMain = tempElement.eq(0).find('img').attr('src');
 				var tempTypeSub1 = tempElement.eq(1).find('img').attr('src');
 				var tempTypeSub2 = tempElement.eq(2).find('img').attr('src');
@@ -352,6 +366,8 @@ function main (){
 				tempISub2 = addSubElement(tempISub2,tempElement.eq(2)[0].title);
 
 				var tempIMainSP = "";
+
+				if (tempIEffect != "") tempName= tempName + "【" + tempIEffect + "】";
 
 
 				if( tempIMain.match(/： /) ){
@@ -383,6 +399,7 @@ function main (){
 					,tempSkId
 					,tempBtn1
 					,tempBtn2
+					,tempIEffect
 				);
 			} else {
 				var tempTd = $(this).find('td.item-name-td1');
@@ -394,6 +411,7 @@ function main (){
 				var tempIMain    = tempElement.eq(0).text();
 				var tempISub1    = tempElement.eq(1).text();
 				var tempISub2    = tempElement.eq(2).text();
+				var tempIEffect = tempElement.eq(3).find('a').text();
 				var tempTypeMain = tempElement.eq(0).find('img').attr('src');
 				var tempTypeSub1 = tempElement.eq(1).find('img').attr('src');
 				var tempTypeSub2 = tempElement.eq(2).find('img').attr('src');
@@ -403,6 +421,8 @@ function main (){
 				tempISub2 = addSubElement(tempISub2,tempElement.eq(2)[0].title);
 
 				var tempIMainSP = "";
+
+				if (tempIEffect != "") tempName= tempName + "【" + tempIEffect + "】";
 
 
 				if( tempIMain.match(/： /) ){
@@ -433,6 +453,7 @@ function main (){
 					,tempTypeSub2
 					,tempSkId
 					,setPageNum
+					,tempIEffect
 				);
 			}
 			setCnt++;
