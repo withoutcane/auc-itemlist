@@ -1,0 +1,19 @@
+{
+   "browser_action": {
+      "default_icon": "icon.gif",
+      "default_title": "AUC item list"
+   },
+   "content_scripts": [ {
+      "all_frames": false,
+      "css": [ "temp.css" ],
+      "js": [ "jquery.min.js", "temp.js" ],
+      "matches": [ "http://suc.au-chronicle.jp/web/items/stock*", "http://suc.au-chronicle.jp/web/guilds/item_stock_put*", "http://suc.au-chronicle.jp/web/auctions/auction_list*", "http://suc.au-chronicle.jp/web/bazars/bazar_list*", "http://suc.au-chronicle.jp/web/bazars/select_list*" ],
+      "run_at": "document_idle"
+   } ],
+   "description": "\u30A2\u30A4\u30C6\u30E0\u30B9\u30C8\u30C3\u30AF\u30921\u30DA\u30FC\u30B8\u306B\u307E\u3068\u3081\u3066\u30BD\u30FC\u30C8\u3059\u308B\u6A5F\u80FD\u3092\u6301\u3061\u307E\u3059\u3002",
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDhpfIJiOvAsuwpCQ1tCLEzZDv9JZmT2PxGLp6KjPfOb3AitTZEP82k3Vl7VWKWjQmVnfN4xm3XC13RLZQwaFUeDRIIX13mWpkAmhVbev4so5cViRIGxlA7Ddm/GIM1I169Ee2S36WjTofautIQ1ZJjXoYETjgimehmVq2VhdNaQQIDAQAB",
+   "manifest_version": 2,
+   "name": "AUC item list",
+   "permissions": [ "tabs" ],
+   "version": "1.8.8"
+}
