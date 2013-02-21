@@ -39,7 +39,7 @@ var skill = [
 	{name:"残心",type:"攻撃"},
 	{name:"命中増加",type:"攻撃"},
 	{name:"回避増加",type:"防御"},
-	{name:"連携攻撃",type:"防御"},
+	{name:"連係攻撃",type:"防御"},
 	{name:"盾術",type:"防御"},
 	{name:"察知",type:"防御"},
 	{name:"鉄壁",type:"防御"},
