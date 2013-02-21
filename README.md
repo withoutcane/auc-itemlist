@@ -31,7 +31,7 @@ V.1.8.2 第5期追加スキルに対応。
 
 インストール方法
 ---------
-１．Download（ https://github.com/withoutcane/auc-itemlist/downloads ） よりaucitemlist.crxをダウンロードする。
+１．Download（ https://github.com/withoutcane/auc-itemlist/raw/master/export/aucitemlist.crx ） よりaucitemlist.crxをダウンロードする。
 
 ２．ChromeのHelpにあるMarket以外からのChrome拡張のインストールに従い、インストールする。
 
