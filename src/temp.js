@@ -140,7 +140,6 @@ var subelement = [
 		}
 	}
 ];
-	
 
 function getTypeText( tempText ){
 	var tempGetText = '';
@@ -472,6 +471,8 @@ function main (){
 			});
 		}
 
+		var rightList = {};
+
 		$.each(setData, function(i,v){
 			if( tempUrl == '/web/items/stock?t=4' ){
 				oHtml += '<tr>';
@@ -543,23 +544,79 @@ function main (){
 				oHtml += v[3] + '</td>';
 				oHtml += '</tr>';
 
-				if( !v[1].match(/―/) && !v[2].match(/粗悪品/) && !v[2].match(/―/) && !v[3].match(/粗悪品/) && !v[3].match(/―/) ){
-					tempRightHtmlEnd += "[合成品]<br />　" + v[1] ;
-					if( !v[2].match(/粗悪品/) && !v[2].match(/―/) ){ tempRightHtmlEnd += "<br />　" + v[2] + ""; }
-					if( !v[3].match(/―/) ){ tempRightHtmlEnd += "<br />　" + v[3]; }
-					tempRightHtmlEnd += "<br />";
-				} else if( !v[1].match(/―/) && !v[2].match(/粗悪品/) && !v[2].match(/―/) && v[3].match(/―/) ){
-					tempRightHtmlEnd += "[合成品]<br />　" + v[1] + "<br />　" + v[2] + "<br />";
-				} else if( v[1].match(/―/) ){
-				} else if( skill[v[9]].type != '' ){
-					tempRightHtml += "[" + skill[v[9]].type + "]" + v[1] + "<br />";
-				} else {
-					tempRightHtmlEnd += v[1] + "<br />";
+				// if( !v[1].match(/―/) && !v[2].match(/粗悪品/) && !v[2].match(/―/) && !v[3].match(/粗悪品/) && !v[3].match(/―/) ){
+				// 	tempRightHtmlEnd += "[合成品]<br />　" + v[1] ;
+				// 	if( !v[2].match(/粗悪品/) && !v[2].match(/―/) ){ tempRightHtmlEnd += "<br />　" + v[2] + ""; }
+				// 	if( !v[3].match(/―/) ){ tempRightHtmlEnd += "<br />　" + v[3]; }
+				// 	tempRightHtmlEnd += "<br />";
+				// } else if( !v[1].match(/―/) && !v[2].match(/粗悪品/) && !v[2].match(/―/) && v[3].match(/―/) ){
+				// 	tempRightHtmlEnd += "[合成品]<br />　" + v[1] + "<br />　" + v[2] + "<br />";
+				// } else if( v[1].match(/―/) ){
+				// } else if( skill[v[9]].type != '' ){
+				// 	tempRightHtml += "[" + skill[v[9]].type + "]" + v[1] + "<br />";
+				// } else {
+				// 	tempRightHtmlEnd += v[1] + "<br />";
+				// }
+
+				var elementtext = "";
+				var elementCount = 0;
+				for (var j = 1; j <= 3; j++) {
+					if(!v[j].match(/―/) && !v[j].match(/粗悪品/) ) {
+						if(elementtext != "") elementtext += ",";
+						elementtext += v[j];
+						elementCount++;
+					}
+				};
+				if(elementtext != "") {
+					if(elementCount > 1) {
+						elementtext = "[合成品]" + elementtext; 
+					} else {
+						if (skill[v[9]].type) elementtext = "["+ skill[v[9]].type +"]" + elementtext;
+					}
+					var name = v[0].replace(/\s+/g, '');
+					if(!rightList[elementtext]) rightList[elementtext] = {};
+					if(!rightList[elementtext][name]) {
+						rightList[elementtext][name] = 1;
+					} else {
+						rightList[elementtext][name]++;
+					}
 				}
-
-
 			}
 		});
+		
+		console.log("itemlist");
+		var elementList = [];
+		var unifyList = []; 
+		for(var i in rightList) {
+			var count = 0;
+			var text = "";
+			for(var j in rightList[i]) count += rightList[i][j];
+			text += i + "×" + count + "(";
+			var k = 3;
+			for (var j in rightList[i]){
+				if(k < 3) text += ",";
+				text += j + "×" + rightList[i][j];
+				if(k <= 0) {
+					text += "…";
+					break;	
+				} else {
+					k--;
+				}
+				if(j < rightList[i].length) righttext += ",";
+			}
+			text += ")<br />";
+			if(text.match(/合成品/)){
+				unifyList.push(text);
+			}else{
+				elementList.push(text);
+			}
+		}
+
+		unifyList.sort();
+		elementList.sort();
+		var righttext = "";
+		for(var i in elementList) righttext += elementList[i];
+		for(var i in unifyList) righttext += unifyList[i];
 
 		if( tempUrl == '/web/items/stock?t=4' ){
 			$('.item-tab-list').append('<table id="stockTable"><tr><th rowspan="2">name</th><th colspan="3">説明</th></tr><tr><th>耐久</th><th>個数</th><th>装備キャラ</th></tr>'+oHtml+'</table>');
@@ -573,7 +630,8 @@ function main (){
 			$('.item-tab-list').append('<table id="stockTable"><tr><th>name</th><th>主要素</th><th>副要素1</th><th>副要素2</th></tr>'+oHtml+'</table>');
 		} else {
 			$('.item-tab-list').append('<table id="stockTable"><tr><th colspan="2">name</th><th>主要素</th><th>副要素1</th><th>副要素2</th></tr>'+oHtml+'</table>');
-			$('#tempItemWrap').append( tempRightHtml + tempRightHtmlEnd + '<br /><br />　');
+//			$('#tempItemWrap').append( tempRightHtml + tempRightHtmlEnd + '<br /><br />　');
+			$('#tempItemWrap').append( righttext + '<br /><br />　');
 		}
 
 	}
