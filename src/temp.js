@@ -76,6 +76,7 @@ var skill = [
 	{name:"MP同時攻撃",type:"コマ"},
 	{name:"捕捉攻撃",type:"コマ"},
 	{name:"自爆",type:"コマ"},
+	{name:"制圧射撃",type:"コマ"},
 	{name:"手加減",type:"コマ"},
 	{name:"威力強化",type:"C"},
 	{name:"命中強化",type:"C"},
