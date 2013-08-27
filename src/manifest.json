@@ -16,5 +16,5 @@
    "name": "AUC item list",
    "update_url": "https://github.com/withoutcane/auc-itemlist/raw/master/updates.xml",
    "permissions": [ "tabs" ],
-   "version": "1.8.12"
+   "version": "1.8.13"
 }
